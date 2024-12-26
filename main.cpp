@@ -5,15 +5,15 @@
 
 using namespace std;
 
-//ÀÚ½ÄÅ¬·¡½º 3°³ »ı¼º (Cat, Dog, Cow)
+//ìì‹í´ë˜ìŠ¤ 3ê°œ ìƒì„± (Cat, Dog, Cow)
 class Cat : public Animal 
 {
 public:
 	void makeSound() {
-		cout << "¹Ì¾ß¾Æ¾Æ¿Ë" << endl;
+		cout << "ë¯¸ì•¼ì•„ì•„ì˜¹" << endl;
 	}
 	void moving() {
-		cout << "»ç»Ó»ç»Ó" << endl;
+		cout << "ì‚¬ë¿ì‚¬ë¿" << endl;
 	}
 };
 
@@ -23,10 +23,10 @@ class Dog : public Animal
 public:
 
 	void makeSound() {
-		cout << "¿Ğ¿Ğ¿Ğ" << endl;
+		cout << "ì™ˆì™ˆì™ˆ" << endl;
 	}
 	void moving() {
-		cout << "Å¹Å¹Å¹" << endl;
+		cout << "íƒíƒíƒ" << endl;
 	}
 };
 
@@ -36,14 +36,14 @@ class Cow : public Animal
 public:
 
 	void makeSound() {
-		cout << "À½¸Ş¿¡¿¡" << endl;
+		cout << "ìŒë©”ì—ì—" << endl;
 	}
 	void moving() {
-		cout << "ÄôÄô" << endl;
+		cout << "ì¿µì¿µ" << endl;
 	}
 };
 
-//·£´ıÀ¸·Î Cat, Dog, CowÁß ÇÏ³ª¸¦ µ¿ÀûÇÒ´ç ÇÑµÚ Animal Å¸ÀÔÀ¸·Î ¹İÈ¯ (´ÙÇü¼º ±¸Çö)
+//ëœë¤ìœ¼ë¡œ Cat, Dog, Cowì¤‘ í•˜ë‚˜ë¥¼ ë™ì í• ë‹¹ í•œë’¤ Animal íƒ€ì…ìœ¼ë¡œ ë°˜í™˜ (ë‹¤í˜•ì„± êµ¬í˜„)
 Animal* createRandomAnimal() {
 	int R_n;
 
@@ -60,41 +60,41 @@ Animal* createRandomAnimal() {
 
 class Zoo {
 private:
-	Animal** Home;			//°¡»óÇÔ¼ö Å¬·¡½º´Â µ¿ÀûÇÒ´çÀÌ ¾ÈµÇ¼­ ÀÌÁßÆ÷ÀÎÅÍ »ç¿ë.
-							//Animal*HomeÀº AnimalÅ¸ÀÔµéÀ» °ü¸®ÇÏ´Â Home ¹è¿­ÀÌÁö¸¸
-							//Animal**Home Àº Animal*Å¸ÀÔÀ» °ü¸®ÇÏ´Â ¹è¿­
+	Animal** Home;			
+							//Animal*Homeì€ Animalíƒ€ì…ë“¤ì„ ê´€ë¦¬í•˜ëŠ” Home ë°°ì—´ì´ì§€ë§Œ
+							//Animal**Home ì€ Animal*íƒ€ì…ì„ ê´€ë¦¬í•˜ëŠ” ë°°ì—´
 	int count = 0;
 	int home_num;
 public:
-	Zoo(int N) {			//»ı¼ºÀÚ. µ¿ÀûÇÒ´çµÈ ÁÖ¼Ò°ªÀ» ¹Ş¾Æ µ¿¹°Ãß°¡ ÇÔ¼ö ½ÇÇà
-		home_num = N;		//N¹ø ¹İº¹ÇÒ ¿¹Á¤
-		Home = new Animal*[N]; //Æ÷ÀÎÅÍ¸¦ ÇÒ´ç.
+	Zoo(int N) {			//ìƒì„±ì. ë™ì í• ë‹¹ëœ ì£¼ì†Œê°’ì„ ë°›ì•„ ë™ë¬¼ì¶”ê°€ í•¨ìˆ˜ ì‹¤í–‰
+		home_num = N;		//Në²ˆ ë°˜ë³µí•  ì˜ˆì •
+		Home = new Animal*[N]; //í¬ì¸í„°ë¥¼ í• ë‹¹.
 
 		for (int i = 0; i < home_num; i++) {
 			addAnimal(createRandomAnimal());
 			
 		}
-		performActions();	// µ¿¹° 10¸¶¸® ´Ù ¹Ş°í ¸ğµç µ¿¹°µéÀÇ ±â´É ½ÇÇà.
+		performActions();	// ë™ë¬¼ 10ë§ˆë¦¬ ë‹¤ ë°›ê³  ëª¨ë“  ë™ë¬¼ë“¤ì˜ ê¸°ëŠ¥ ì‹¤í–‰.
 	}
 
-	void addAnimal(Animal* animal) { //¹Ş´Â Å¸ÀÔÀº AnimalÀÌÁö¸¸ ½ÇÁ¦´Â Cat, Dog, Cow Áß ÇÏ³ª. Animal¿¡¼­ ±¸ÇöÇÑ °¡»óÇÔ¼ö·Î ±¸ºĞ
-		if (count >= home_num) cout << "Over Flow" << endl; //N¸¶¸®°¡ ´ÙÃ¡´Ù¸é ¿À¹öÇÃ·Î¿ì ¹ß»ı.
-		else {				//»çÀ°Àå ºñ¾îÀÖÀ¸¸é µ¿¹° Ãß°¡.
+	void addAnimal(Animal* animal) { //ë°›ëŠ” íƒ€ì…ì€ Animalì´ì§€ë§Œ ì‹¤ì œëŠ” Cat, Dog, Cow ì¤‘ í•˜ë‚˜. Animalì—ì„œ êµ¬í˜„í•œ ê°€ìƒí•¨ìˆ˜ë¡œ êµ¬ë¶„
+		if (count >= home_num) cout << "Over Flow" << endl; //Në§ˆë¦¬ê°€ ë‹¤ì°¼ë‹¤ë©´ ì˜¤ë²„í”Œë¡œìš° ë°œìƒ.
+		else {				//ì‚¬ìœ¡ì¥ ë¹„ì–´ìˆìœ¼ë©´ ë™ë¬¼ ì¶”ê°€.
 			this->Home[count] = animal;
 			count++;
 		}
 	};
 
-	void performActions() { //µ¿¹°µé Çàµ¿ ¸ğµÎ ½ÇÇà
+	void performActions() { //ë™ë¬¼ë“¤ í–‰ë™ ëª¨ë‘ ì‹¤í–‰
 		for (int j = 0; j < count; j++) {
 			Home[j]->makeSound();
 			Home[j]->moving();
 		}
 	};
 
-	~Zoo() {				//ÇÁ·Î±×·¥ Á¾·áµÇ¸é µ¿ÀûÇÒ´çµÈ »çÀ°Àå¼Ó µ¿¹°µé ¸ğµÎ ¹İÈ¯.
+	~Zoo() {				//í”„ë¡œê·¸ë¨ ì¢…ë£Œë˜ë©´ ë™ì í• ë‹¹ëœ ì‚¬ìœ¡ì¥ì† ë™ë¬¼ë“¤ ëª¨ë‘ ë°˜í™˜.
 		for (int j = 0; j < count; j++) {
-			delete Home[j]; //j¹øÀÇ HomeÀÌÁö¸¸ ³»¿ëÀº µ¿¹°
+			delete Home[j]; //jë²ˆì˜ Homeì´ì§€ë§Œ ë‚´ìš©ì€ ë™ë¬¼
 		}
 		delete[] Home;
 	};
@@ -107,10 +107,10 @@ public:
 
 
 int main() {
-	srand(time(NULL)); //¹«½¼¶æÀÎÁö ¸ğ¸§. ±×³É ÈçÈ÷ ¾²´ÂÁß.
+	srand(time(NULL)); //ë¬´ìŠ¨ëœ»ì¸ì§€ ëª¨ë¦„. ê·¸ëƒ¥ í”íˆ ì“°ëŠ”ì¤‘.
 	int N;
 
-	cout << "¸î¸¶¸® ¹ŞÀ»°ÇÁö ¾²¼¼¿ä" << endl;
+	cout << "ëª‡ë§ˆë¦¬ ë°›ì„ê±´ì§€ ì“°ì„¸ìš”" << endl;
 	cin >> N;
 	Zoo seoul(N);
 	return 0;
