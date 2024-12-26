@@ -6,7 +6,7 @@
 using namespace std;
 
 //자식클래스 3개 생성 (Cat, Dog, Cow)
-class Cat : public Animal 
+class Cat : public Animal
 {
 public:
 	void makeSound() {
@@ -47,32 +47,33 @@ public:
 Animal* createRandomAnimal() {
 	int R_n;
 
-	R_n = rand() % 3; 
+	R_n = rand() % 3;
 
 	switch (R_n) {
 	case 0: return new Cat;
 	case 1: return new Dog;
 	case 2: return new Cow;
 	}
+	return nullptr;
 }
 
 
 
 class Zoo {
 private:
-	Animal** Home;			
-							//Animal*Home은 Animal타입들을 관리하는 Home 배열이지만
-							//Animal**Home 은 Animal*타입을 관리하는 배열
+	Animal** Home;
+	//Animal*Home은 Animal타입들을 관리하는 Home 배열이지만
+	//Animal**Home 은 Animal*타입을 관리하는 배열
 	int count = 0;
 	int home_num;
 public:
 	Zoo(int N) {			//생성자. 동적할당된 주소값을 받아 동물추가 함수 실행
 		home_num = N;		//N번 반복할 예정
-		Home = new Animal*[N]; //포인터를 할당.
+		Home = new Animal * [N]; //포인터를 할당.
 
 		for (int i = 0; i < home_num; i++) {
 			addAnimal(createRandomAnimal());
-			
+
 		}
 		performActions();	// 동물 10마리 다 받고 모든 동물들의 기능 실행.
 	}
@@ -83,21 +84,21 @@ public:
 			this->Home[count] = animal;
 			count++;
 		}
-	};
+	}
 
 	void performActions() { //동물들 행동 모두 실행
 		for (int j = 0; j < count; j++) {
 			Home[j]->makeSound();
 			Home[j]->moving();
 		}
-	};
+	}
 
 	~Zoo() {				//프로그램 종료되면 동적할당된 사육장속 동물들 모두 반환.
 		for (int j = 0; j < count; j++) {
 			delete Home[j]; //j번의 Home이지만 내용은 동물
 		}
 		delete[] Home;
-	};
+	}
 };
 
 
