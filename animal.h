@@ -15,9 +15,9 @@ public:
 	void set_name(string n);
 	void set_howl(string mhowl);
 	virtual void moving();
-	virtual void makeSound();
+	virtual void makeSound() = 0;
 	 ~Animal() {
-		cout << "�Ҹ��Ѵ�." << endl;
+		cout << "¼Ò¸êÇÑ´Ù." << endl;
 	 }
 };
 
